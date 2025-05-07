@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from "react";
 // import io from "socket.io-client";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { set } from "mongoose";
 import socket from "../utils/socket.io"; 
 // const socket = io("http://localhost:5001");
 
