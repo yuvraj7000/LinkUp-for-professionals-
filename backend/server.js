@@ -21,7 +21,7 @@ const app = express();
 const server = createServer(app); // Create HTTP server
 const io = new Server(server, {
     cors: {
-        origin: process.env.CLIENT_URL, // Allow frontend origin
+        origin: "*", // Allow frontend origin
         credentials: true,
     },
 });
