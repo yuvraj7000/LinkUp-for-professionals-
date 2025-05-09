@@ -32,20 +32,32 @@ const MessageBox = ({ reciver , unreadMessages }) => {
         }
     };
 
-    useEffect(() => {
-        if (senderId) {
+useEffect(() => {
+    if (senderId) {
+        try {
             // Listen for connect event and emit senderId.
             socket.on("connect", () => {
-                socket.emit("register", senderId);
+                try {
+                    socket.emit("register", senderId);
+                } catch (err) {
+                    console.error("Error emitting register on connect:", err);
+                }
             });
             if (socket.connected) {
-                socket.emit("register", senderId);
+                try {
+                    socket.emit("register", senderId);
+                } catch (err) {
+                    console.error("Error emitting register when socket already connected:", err);
+                }
             }
+        } catch (error) {
+            console.error("Socket registration error:", error);
         }
-        return () => {
-            socket.off("connect");
-        };
-    }, [senderId, reciverId, reciver]);
+    }
+    return () => {
+        socket.off("connect");
+    };
+}, [senderId, reciverId, reciver]);
 
     useEffect(() => {
         setReciverId(reciver);
