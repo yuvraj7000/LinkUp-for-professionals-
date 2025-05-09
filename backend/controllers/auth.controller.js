@@ -79,11 +79,11 @@ export const login = async (req, res) => {
 
 		// Create and send token
 		const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "3d" });
-		await res.cookie("jwt-linkedin", token, {
+		res.cookie("jwt-linkedin", token, {
 			httpOnly: true,
 			maxAge: 3 * 24 * 60 * 60 * 1000,
-			sameSite: "strict",
-			secure: process.env.NODE_ENV === "production",
+			sameSite: "none", // allow cross-site cookie sharing
+			secure: process.env.NODE_ENV === "production", // must be true for sameSite "none"
 		});
 
 		res.json({ message: "Logged in successfully" });
