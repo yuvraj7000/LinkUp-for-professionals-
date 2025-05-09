@@ -1,9 +1,7 @@
 import { useEffect, useState, useRef } from "react";
-// import io from "socket.io-client";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import socket from "../utils/socket.io"; 
-// const socket = io("http://localhost:5001");
 
 const MessageBox = ({ reciver , unreadMessages }) => {
     const { data: user } = useQuery({ queryKey: ["authUser"] });
@@ -20,7 +18,7 @@ const MessageBox = ({ reciver , unreadMessages }) => {
     const getConversationMessages = async (userOne, userTwo) => {
         try {
             const response = await axios.post(
-                "http://localhost:5001/api/v1/users/conversationMessages",
+                `${import.meta.env.VITE_BACKEND}/api/v1/users/conversationMessages`,
                 { userOne, userTwo },
                 { withCredentials: true }
             );

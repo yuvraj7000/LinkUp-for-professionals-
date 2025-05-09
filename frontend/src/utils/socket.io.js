@@ -1,4 +1,4 @@
 import io from "socket.io-client";
-const socket = io("http://localhost:5001");
+const socket = io(import.meta.env.VITE_BACKEND);
 
 export default socket;
