@@ -15,12 +15,14 @@ const Navbar = () => {
 	  useEffect(() => {
 			if (authUser._id) {
 
-				console.log("socket connected")
+				console.log("no socket connected");
 				// Listen for connect event and emit senderId.
 				socket.on("connect", () => {
+					console.log("socket connected");
 					socket.emit("register", authUser._id);
 				});
 				if (socket.connected) {
+					console.log("socket connected");
 					socket.emit("register", authUser._id);
 				}
 			}
