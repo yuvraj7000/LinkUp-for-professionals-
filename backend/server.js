@@ -80,7 +80,7 @@ io.on("connection", (socket) => {
 
 // Middleware
 app.use(cors({
-    origin: "*",
+    origin: process.env.CLIENT_URL,
     credentials: true,
 }));
 app.use(express.json({ limit: "5mb" })); // Parse JSON request bodies
